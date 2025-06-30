@@ -131,7 +131,7 @@ def display_map(matrix, prince_pos=None, princess_pos=None, placeholder=None):
             justify-content: center; /* Căn giữa bản đồ theo chiều ngang */
         }
         .map-container {
-            width: 40vw; /* Chiếm 40% chiều rộng màn hình */
+            width: 10vw; /* Chiếm 40% chiều rộng màn hình */
             max-width: 90vh; /* Ngăn bản đồ quá lớn, giới hạn bởi 90% chiều cao */
             min-width: 320px; /* Đảm bảo bản đồ không quá nhỏ */
             display: grid;
