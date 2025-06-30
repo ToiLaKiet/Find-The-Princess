@@ -2,7 +2,7 @@ import streamlit as st
 import re
 import time
 import copy # GỢI Ý: Import thư viện copy để tạo bản sao sâu
-from utils import *
+from src.utils import *
 from PIL import Image
 import random
 
