@@ -115,30 +115,78 @@ def convert_matrix_to_text(matrix):
     # Nối tất cả các chuỗi hàng lại với nhau bằng ký tự xuống dòng
     return "\n".join(row_strings)
 def display_map(matrix, prince_pos=None, princess_pos=None, placeholder=None):
-    map_str = ""
-    # GỢI Ý: Chuyển sang một bảng màu khác để dễ nhìn hơn
-    # ⬜: Đường đi (0), 🪨: Đá (1), 🟩: Đường đã đi (2), 🤴: Hoàng tử, 👸: Công chúa
+    """
+    Hiển thị bản đồ bằng HTML và CSS Grid để đảm bảo các ô cách đều và đẹp mắt.
+    """
+    # Định nghĩa các lớp CSS cho từng loại ô
+    # Chúng ta sẽ dùng màu nền thay vì emoji khối ⬜ và 🪨
+    css_styles = """
+    <style>
+        .map-container {
+            display: inline-grid;
+            grid-template-columns: repeat(var(--cols), 1fr);
+            gap: 3px; /* Khoảng cách giữa các ô */
+            background-color: #555; /* Màu nền cho khoảng cách */
+            border: 2px solid #555;
+            border-radius: 5px;
+            padding: 3px;
+            overflow-x: auto;
+        }
+        .map-cell {
+            width: 2.2em; /* Kích thước ô */
+            height: 2.2em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2em; /* Kích thước emoji */
+            border-radius: 3px;
+        }
+        .path { background-color: #e0e0e0; } /* Màu đường đi */
+        .wall { background-color: #6c757d; } /* Màu đá */
+        .trail { background-color: #87CEEB; } /* Màu đường đã đi (xanh da trời) */
+    </style>
+    """
 
+    rows = len(matrix)
+    cols = len(matrix[0])
+    
+    # Bắt đầu xây dựng chuỗi HTML cho các ô
+    map_cells_html = ""
     for r_idx, row in enumerate(matrix):
-        row_str = ""
-        for c_idx, cell in enumerate(row):
+        for c_idx, cell_type in enumerate(row):
             pos = (r_idx, c_idx)
+            content = ""
+            cell_class = ""
+            
+            # Ưu tiên hiển thị hoàng tử/công chúa
             if prince_pos and pos == prince_pos:
-                row_str += "🤴"
+                content = "🤴"
+                # Nền vẫn là màu đường đi
+                cell_class = "path"
             elif princess_pos and pos == princess_pos:
-                row_str += "👸"
-            elif cell == 2: # Đường đã đi
-                row_str += "🟩"
-            elif cell == 1: # Đá
-                row_str += "🪨"
-            else: # Đường đi
-                row_str += "⬜"
-            row_str += "  "
-        map_str += f"<div style='font-size: 0.35vw; line-height: 1.2; white-space: nowrap;'>{row_str}</div>"
+                content = "👸"
+                cell_class = "path"
+            else:
+                # Xác định lớp CSS cho màu nền
+                if cell_type == 2:   # Đường đã đi
+                    cell_class = "trail"
+                elif cell_type == 1: # Đá
+                    cell_class = "wall"
+                else:                # Đường đi
+                    cell_class = "path"
 
-    html_content = f"<div style='overflow-x: auto;'>{map_str}</div>"
+            map_cells_html += f'<div class="map-cell {cell_class}">{content}</div>'
+
+    # Ghép CSS và HTML lại với nhau
+    # Sử dụng biến CSS `--cols` để truyền số cột vào grid
+    final_html = f"""
+    {css_styles}
+    <div class="map-container" style="--cols: {cols};">
+        {map_cells_html}
+    </div>
+    """
+
     if placeholder:
-        placeholder.markdown(html_content, unsafe_allow_html=True)
+        placeholder.markdown(final_html, unsafe_allow_html=True)
     else:
-        st.markdown(html_content, unsafe_allow_html=True)
-
+        st.markdown(final_html, unsafe_allow_html=True)
