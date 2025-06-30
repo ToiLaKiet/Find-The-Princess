@@ -178,7 +178,7 @@ with col2:
 st.markdown("""
 <style>
     div[data-testid="column"] {
-        padding-right: 10px;
+        padding-right: 5px;
     }
 </style>
 """, unsafe_allow_html=True)
