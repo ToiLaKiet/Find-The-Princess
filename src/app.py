@@ -147,11 +147,11 @@ st.title("🗺️ UIT@CS112 | Kén Rể | Đi tìm công chúa")
 st.header("Bước 1: Nhập dữ liệu bản đồ")
 map_input_text = st.text_area(
     "Dán dữ liệu ma trận của bạn vào đây (0: đường đi, 1: đá).",
-    value=st.session_state.matrix_data if 'matrix_data' in st.session_state else DEFAULT_MAP_DATA,
+    value=st.session_state.matrix_data if st.session_state.matrix_data != None else DEFAULT_MAP_DATA,
     height=250
 )
 # Tạo 2 cột
-col1, col2 = st.columns(2)
+col1, col2 = st.columns([1,1], gap="small")
 with col1:
     if st.button("Tạo Bản Đồ", type="primary", icon="⚙️"):
         parsed_matrix = parse_matrix_from_text(map_input_text)
