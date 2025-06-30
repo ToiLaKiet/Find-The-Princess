@@ -102,6 +102,8 @@ st.markdown("""
 with col1:
     if st.button("Tạo Bản Đồ", type="primary", icon="⚙️"):
         st.session_state.map_confirmed = False  
+        st.session_state.matrix_data = None  # Reset dữ liệu bản đồ
+        time.sleep(0.5)  # Giả lập thời gian xử lý
         parsed_matrix = parse_matrix_from_text(map_input_text)
         if parsed_matrix:
             time.sleep(0.5)  # Giả lập thời gian xử lý
