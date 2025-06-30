@@ -152,6 +152,14 @@ map_input_text = st.text_area(
 )
 # Tạo 2 cột
 col1, col2 = st.columns(2) # gap="small" để tạo khoảng cách nhỏ giữa 2 cột 
+st.markdown("""
+<style>
+    div[data-testid="column"] {
+        padding: 0 10px; /* Giảm khoảng cách giữa các cột */
+    }
+</style>
+""", unsafe_allow_html=True)
+
 with col1:
     if st.button("Tạo Bản Đồ", type="primary", icon="⚙️"):
         parsed_matrix = parse_matrix_from_text(map_input_text)
@@ -175,13 +183,6 @@ with col2:
         st.session_state.princess_pos = None
         st.rerun()  # Làm mới trang để xoá bản đồ
 
-st.markdown("""
-<style>
-    div[data-testid="column"] {
-        padding-right: 5px;
-    }
-</style>
-""", unsafe_allow_html=True)
 
 if st.session_state.map_confirmed:
     st.success(f"Bản đồ đã được tạo thành công với kích thước {st.session_state.rows}x{st.session_state.cols}!") 
