@@ -118,14 +118,13 @@ with col1:
         else:
             st.session_state.map_confirmed = False
 with col2:
-    if st.button("Sinh ngẫu nhiên bản đồ", type="primary", icon="🎲"):
+    if st.button("Sinh ngẫu nhiên bản đồ", type="secondary", icon="🎲"):
         st.session_state.map_confirmed = True
         # Randomly choose rows and columns between 3 and 100
-        rows = np.random.randint(3, 101)
-        cols = np.random.randint(3, 101)
-
+        st.session_state.rows = np.random.randint(3, 101)
+        st.session_state.cols = np.random.randint(3, 101)
         # Generate matrix with random 0 or 1
-        st.session_state.matrix_data = np.random.randint(0, 2, size=(rows, cols))
+        st.session_state.matrix_data = np.random.randint(0, 2, size=(st.session_state.rows, st.session_state.cols))
 with col3:
     if st.button("Đặt Lại", type="secondary", icon="🔄"):
         st.session_state.matrix_data = None
