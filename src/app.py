@@ -124,7 +124,7 @@ def display_map(matrix, prince_pos=None, princess_pos=None, placeholder=None):
             else: # Đường đi
                 row_str += "⬜"
             row_str += "  "
-        map_str += f"<div style='font-size: 1vw; line-height: 1.2; white-space: nowrap;'>{row_str}</div>"
+        map_str += f"<div style='font-size: 0.5vw; line-height: 1.2; white-space: nowrap;'>{row_str}</div>"
 
     html_content = f"<div style='overflow-x: auto;'>{map_str}</div>"
     if placeholder:
