@@ -115,6 +115,7 @@ def convert_matrix_to_text(matrix):
 
     # Nối tất cả các chuỗi hàng lại với nhau bằng ký tự xuống dòng
     return "\n".join(row_strings)
+
 def display_map(matrix, prince_pos=None, princess_pos=None, placeholder=None):
     """
     Hiển thị bản đồ với một giải pháp duy nhất, thanh lịch:
