@@ -71,35 +71,6 @@ DEFAULT_MAP_DATA = """
 0 0 1 0 0 0 0 0 0 0 0 1 0 0 1 0 0 0 1 0 0 0 1 1 1 1 0 1 0 1 0 0 0 1 1 0 0 0 0 0 1 1 0 0 0 0 0 0 1 0 0 0 0
 """.strip()
 
-
-def display_map(matrix, prince_pos=None, princess_pos=None, placeholder=None):
-    map_str = ""
-    # GỢI Ý: Chuyển sang một bảng màu khác để dễ nhìn hơn
-    # ⬜: Đường đi (0), 🪨: Đá (1), 🟩: Đường đã đi (2), 🤴: Hoàng tử, 👸: Công chúa
-
-    for r_idx, row in enumerate(matrix):
-        row_str = ""
-        for c_idx, cell in enumerate(row):
-            pos = (r_idx, c_idx)
-            if prince_pos and pos == prince_pos:
-                row_str += "🤴"
-            elif princess_pos and pos == princess_pos:
-                row_str += "👸"
-            elif cell == 2: # Đường đã đi
-                row_str += "🟩"
-            elif cell == 1: # Đá
-                row_str += "🪨"
-            else: # Đường đi
-                row_str += "⬜"
-            row_str += "  "
-        map_str += f"<div style='font-size: 0.5vw; line-height: 1.2; white-space: nowrap;'>{row_str}</div>"
-
-    html_content = f"<div style='overflow-x: auto;'>{map_str}</div>"
-    if placeholder:
-        placeholder.markdown(html_content, unsafe_allow_html=True)
-    else:
-        st.markdown(html_content, unsafe_allow_html=True)
-
 # --- Khởi tạo Session State ---
 if 'matrix_data' not in st.session_state:
     st.session_state.matrix_data = None
@@ -130,6 +101,7 @@ st.markdown("""
 
 with col1:
     if st.button("Tạo Bản Đồ", type="primary", icon="⚙️"):
+        st.session_state.map_confirmed = False  
         parsed_matrix = parse_matrix_from_text(map_input_text)
         if parsed_matrix:
             time.sleep(0.5)  # Giả lập thời gian xử lý
