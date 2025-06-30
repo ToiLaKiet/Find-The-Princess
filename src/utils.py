@@ -118,46 +118,36 @@ def convert_matrix_to_text(matrix):
 def display_map(matrix, prince_pos=None, princess_pos=None, placeholder=None):
     """
     Hiển thị bản đồ bằng HTML và CSS Grid.
-    Container bản đồ sẽ chiếm khoảng 40% chiều rộng màn hình và các ô sẽ tự co giãn.
+    - Container bản đồ chiếm khoảng 40% chiều rộng màn hình và các ô tự co giãn.
+    - Các ô chướng ngại vật sẽ có icon tảng đá 🪨.
+    - Xử lý đúng cả trường hợp có và không có placeholder.
     """
     # Định nghĩa các lớp CSS.
     css_styles = """
     <style>
         .map-wrapper {
-            /* Container này giúp căn giữa bản đồ nếu cần */
             width: 100%;
             display: flex;
             justify-content: center; /* Căn giữa bản đồ theo chiều ngang */
         }
         .map-container {
-            /* YÊU CẦU CHÍNH: Chiếm 40% chiều rộng màn hình */
-            width: 40vw;
-
-            /* Cải tiến thêm để UI đẹp hơn trên mọi màn hình */
-            max-width: 90vh; /* Ngăn bản đồ quá lớn trên màn hình siêu rộng, giới hạn chiều rộng bằng 90% chiều cao */
-            min-width: 320px; /* Đảm bảo bản đồ không quá nhỏ trên màn hình hẹp */
-
-            /* Các thuộc tính của CSS Grid */
-            display: grid; /* Sử dụng Grid Layout */
+            width: 40vw; /* Chiếm 40% chiều rộng màn hình */
+            max-width: 90vh; /* Ngăn bản đồ quá lớn, giới hạn bởi 90% chiều cao */
+            min-width: 320px; /* Đảm bảo bản đồ không quá nhỏ */
+            display: grid;
             grid-template-columns: repeat(var(--cols), 1fr); /* Chia thành N cột bằng nhau */
-            gap: 2px; /* Khoảng cách nhỏ giữa các ô */
+            gap: 2px;
             border: 2px solid #555;
             border-radius: 5px;
             padding: 2px;
             background-color: #555;
         }
         .map-cell {
-            /* Tự động biến thành hình vuông */
-            aspect-ratio: 1 / 1;
-
-            /* Căn giữa nội dung (emoji) trong ô */
+            aspect-ratio: 1 / 1; /* Tự động thành hình vuông */
             display: flex;
             justify-content: center;
             align-items: center;
-
-            /* Kích thước emoji co giãn theo kích thước màn hình */
-            font-size: 1.8vmin; /* vmin = 1% của chiều nhỏ hơn (rộng hoặc cao) */
-            
+            font-size: 1.8vmin; /* Kích thước emoji co giãn */
             border-radius: 3px;
         }
         /* Định nghĩa màu sắc cho từng loại ô */
@@ -168,7 +158,6 @@ def display_map(matrix, prince_pos=None, princess_pos=None, placeholder=None):
     """
 
     # Lấy kích thước của ma trận
-    # Chuyển đổi sang numpy array để dùng .shape cho an toàn
     matrix_np = np.array(matrix)
     rows, cols = matrix_np.shape
 
@@ -177,31 +166,30 @@ def display_map(matrix, prince_pos=None, princess_pos=None, placeholder=None):
     for r_idx in range(rows):
         for c_idx in range(cols):
             pos = (r_idx, c_idx)
-            content = ""
+            content = ""  # Mặc định ô không có emoji
             cell_class = ""
             
             # Ưu tiên hiển thị hoàng tử/công chúa
             if prince_pos and pos == prince_pos:
                 content = "🤴"
-                # Nền vẫn là màu đường đi
-                cell_class = "path"
+                cell_class = "path" # Hoàng tử đứng trên nền đường đi
             elif princess_pos and pos == princess_pos:
                 content = "👸"
-                cell_class = "path"
+                cell_class = "path" # Công chúa đứng trên nền đường đi
             else:
-                # Xác định lớp CSS cho màu nền dựa trên giá trị của ô
+                # Xác định lớp CSS và nội dung cho các ô còn lại
                 cell_type = matrix_np[r_idx, c_idx]
                 if cell_type == 2:   # Đường đã đi
                     cell_class = "trail"
-                elif cell_type == 1: # Đá
+                elif cell_type == 1: # Đá / Chướng ngại vật
                     cell_class = "wall"
-                else:                # Đường đi
+                    content = "🪨"  # << YÊU CẦU MỚI: Thêm icon tảng đá
+                else:                # Đường đi trống
                     cell_class = "path"
 
             map_cells_html += f'<div class="map-cell {cell_class}">{content}</div>'
 
     # Ghép CSS và HTML lại với nhau
-    # Sử dụng biến CSS `--cols` để truyền số cột vào grid một cách linh hoạt
     final_html = f"""
     {css_styles}
     <div class="map-wrapper">
@@ -211,7 +199,10 @@ def display_map(matrix, prince_pos=None, princess_pos=None, placeholder=None):
     </div>
     """
 
+    # XỬ LÝ ĐÚNG 2 TRƯỜNG HỢP: có và không có placeholder
     if placeholder:
+        # Nếu có placeholder, cập nhật nội dung vào đúng vị trí đó (dành cho animation)
         placeholder.markdown(final_html, unsafe_allow_html=True)
     else:
+        # Nếu không, chỉ cần vẽ bản đồ ra màn hình (dành cho hiển thị tĩnh ban đầu)
         st.markdown(final_html, unsafe_allow_html=True)
