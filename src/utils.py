@@ -117,42 +117,53 @@ def convert_matrix_to_text(matrix):
     return "\n".join(row_strings)
 def display_map(matrix, prince_pos=None, princess_pos=None, placeholder=None):
     """
-    Hiển thị bản đồ bằng HTML và CSS Grid.
-    - Bản đồ sẽ nằm gọn trong một "hộp" và tự động có thanh cuộn ngang nếu quá rộng.
-    - Các ô luôn là hình vuông và không bị bóp méo, nội dung không bị tràn.
+    Hiển thị bản đồ với một giải pháp duy nhất, thanh lịch:
+    - Bản đồ luôn nằm gọn trong một "hộp" có kích thước tương đối với màn hình.
+    - Các ô bên trong tự động co giãn để lấp đầy "hộp" và luôn là hình vuông.
+    - Nội dung (emoji) được đảm bảo không bao giờ tràn ra ngoài làm vỡ layout.
     """
-    # Định nghĩa các lớp CSS.
+    # Định nghĩa CSS.
     css_styles = """
     <style>
         .map-wrapper {
-            /* Đây là "cái hộp" chứa bản đồ */
-            width: 100%;             /* Luôn chiếm toàn bộ chiều rộng của layout Streamlit */
-            overflow-x: auto;        /* QUAN TRỌNG NHẤT: Tự động thêm thanh cuộn ngang nếu nội dung bên trong tràn */
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            padding: 10px;
-            background-color: #f8f9fa;
+            /* Container này giúp căn giữa bản đồ */
+            width: 100%;
+            display: flex;
+            justify-content: center;
         }
         .map-container {
-            /* Đây là bản thân cái grid */
-            display: inline-grid; /* Giúp wrapper tính toán đúng chiều rộng của grid */
+            /* Đây là "cái hộp" có kích thước cố định so với màn hình */
+            width: 45vw; /* Chiếm 45% chiều rộng màn hình */
+            max-width: 90vh; /* Ngăn bản đồ quá lớn trên màn hình siêu rộng */
+            min-width: 300px; /* Đảm bảo bản đồ không quá nhỏ trên màn hình hẹp */
+
+            /* Các thuộc tính của CSS Grid */
+            display: grid;
+            /* CHÌA KHÓA #1: Chia chiều rộng thành N cột bằng nhau (1fr = 1 phần) */
             grid-template-columns: repeat(var(--cols), 1fr);
-            gap: 3px;
+            gap: 2px;
+            
+            border: 2px solid #555;
+            border-radius: 5px;
+            padding: 2px;
+            background-color: #555;
         }
         .map-cell {
-            /* Kích thước ô cố định và tỉ lệ, không phụ thuộc màn hình */
-            width: 2.5em;
-            height: 2.5em;
+            /* CHÌA KHÓA #2: Tự động làm cho chiều cao bằng chiều rộng, tạo ra ô vuông hoàn hảo */
+            aspect-ratio: 1 / 1;
 
             /* Căn giữa nội dung (emoji) trong ô */
             display: flex;
             justify-content: center;
             align-items: center;
 
-            /* Kích thước emoji tỉ lệ với kích thước ô, không phải màn hình */
-            font-size: 1.5em;
+            /* Kích thước emoji co giãn, tỉ lệ với chiều nhỏ hơn của màn hình */
+            font-size: 2vmin;
             
-            border-radius: 4px;
+            /* CHÌA KHÓA #3: "LÁ CHẮN BẢO VỆ" - Đảm bảo nội dung không bao giờ tràn ra ngoài */
+            overflow: hidden;
+
+            border-radius: 3px;
         }
         /* Định nghĩa màu sắc cho từng loại ô */
         .path { background-color: #e9ecef; }
@@ -161,7 +172,6 @@ def display_map(matrix, prince_pos=None, princess_pos=None, placeholder=None):
     </style>
     """
 
-    # Lấy kích thước của ma trận
     matrix_np = np.array(matrix)
     rows, cols = matrix_np.shape
 
@@ -191,7 +201,7 @@ def display_map(matrix, prince_pos=None, princess_pos=None, placeholder=None):
 
             map_cells_html += f'<div class="map-cell {cell_class}">{content}</div>'
 
-    # Ghép CSS và HTML lại với nhau
+    # Ghép CSS và HTML
     final_html = f"""
     {css_styles}
     <div class="map-wrapper">
