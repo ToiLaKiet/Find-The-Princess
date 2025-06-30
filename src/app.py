@@ -106,7 +106,6 @@ with col1:
         st.session_state.matrix_data = None  # Reset dữ liệu bản đồ
         parsed_matrix = parse_matrix_from_text(map_input_text)
         if parsed_matrix:
-            time.sleep(0.5)  # Giả lập thời gian xử lý
             st.session_state.matrix_data = parsed_matrix
             st.session_state.rows = len(parsed_matrix)
             st.session_state.cols = len(parsed_matrix[0])
@@ -217,7 +216,12 @@ if st.session_state.map_confirmed:
                     )
                     time.sleep(0.15) 
                 
-                st.success("Thành công! Hoàng tử đã cứu được công chúa! ❤️")
+                st.success("Thành công! Hoàng tử đã tìm được công chúa! ❤️")
                 st.balloons()
+                # Chèn audio file (applause.mp3) trong cùng thư mục
+                audio_file = open('applause.mp3', 'rb')
+                audio_bytes = audio_file.read()
+
+                st.audio(audio_bytes, format='audio/mp3')
             else:
                 st.error("Rất tiếc, không có đường nào để Hoàng tử tìm Công chúa. 💔")
