@@ -117,103 +117,29 @@ def convert_matrix_to_text(matrix):
     return "\n".join(row_strings)
 
 def display_map(matrix, prince_pos=None, princess_pos=None, placeholder=None):
-    """
-    Hiển thị bản đồ với một giải pháp duy nhất, thanh lịch:
-    - Bản đồ luôn nằm gọn trong một "hộp" có kích thước tương đối với màn hình.
-    - Các ô bên trong tự động co giãn để lấp đầy "hộp" và luôn là hình vuông.
-    - Nội dung (emoji) được đảm bảo không bao giờ tràn ra ngoài làm vỡ layout.
-    """
-    # Định nghĩa CSS.
-    css_styles = """
-    <style>
-        .map-wrapper {
-            /* Container này giúp căn giữa bản đồ */
-            width: 100%;
-            display: flex;
-            justify-content: center;
-        }
-        .map-container {
-            /* Đây là "cái hộp" có kích thước cố định so với màn hình */
-            width: 45vw; /* Chiếm 45% chiều rộng màn hình */
-            max-width: 90vh; /* Ngăn bản đồ quá lớn trên màn hình siêu rộng */
-            min-width: 300px; /* Đảm bảo bản đồ không quá nhỏ trên màn hình hẹp */
+    map_str = ""
+    # GỢI Ý: Chuyển sang một bảng màu khác để dễ nhìn hơn
+    # ⬜: Đường đi (0), 🪨: Đá (1), 🟩: Đường đã đi (2), 🤴: Hoàng tử, 👸: Công chúa
 
-            /* Các thuộc tính của CSS Grid */
-            display: grid;
-            /* CHÌA KHÓA #1: Chia chiều rộng thành N cột bằng nhau (1fr = 1 phần) */
-            grid-template-columns: repeat(var(--cols), 1fr);
-            gap: 2px;
-            
-            border: 2px solid #555;
-            border-radius: 5px;
-            padding: 2px;
-            background-color: #555;
-        }
-        .map-cell {
-            /* CHÌA KHÓA #2: Tự động làm cho chiều cao bằng chiều rộng, tạo ra ô vuông hoàn hảo */
-            aspect-ratio: 1 / 1;
-
-            /* Căn giữa nội dung (emoji) trong ô */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            /* Kích thước emoji co giãn, tỉ lệ với chiều nhỏ hơn của màn hình */
-            font-size: 2vmin;
-            
-            /* CHÌA KHÓA #3: "LÁ CHẮN BẢO VỆ" - Đảm bảo nội dung không bao giờ tràn ra ngoài */
-            overflow: hidden;
-
-            border-radius: 3px;
-        }
-        /* Định nghĩa màu sắc cho từng loại ô */
-        .path { background-color: #e9ecef; }
-        .wall { background-color: #6c757d; }
-        .trail { background-color: #87CEEB; }
-    </style>
-    """
-
-    matrix_np = np.array(matrix)
-    rows, cols = matrix_np.shape
-
-    # Bắt đầu xây dựng chuỗi HTML
-    map_cells_html = ""
-    for r_idx in range(rows):
-        for c_idx in range(cols):
+    for r_idx, row in enumerate(matrix):
+        row_str = ""
+        for c_idx, cell in enumerate(row):
             pos = (r_idx, c_idx)
-            content = ""
-            cell_class = ""
-            
             if prince_pos and pos == prince_pos:
-                content = "🤴"
-                cell_class = "path"
+                row_str += "🤴"
             elif princess_pos and pos == princess_pos:
-                content = "👸"
-                cell_class = "path"
-            else:
-                cell_type = matrix_np[r_idx, c_idx]
-                if cell_type == 2:
-                    cell_class = "trail"
-                elif cell_type == 1:
-                    cell_class = "wall"
-                    content = "🪨"
-                else:
-                    cell_class = "path"
+                row_str += "👸"
+            elif cell == 2: # Đường đã đi
+                row_str += "🟩"
+            elif cell == 1: # Đá
+                row_str += "🪨"
+            else: # Đường đi
+                row_str += "⬜"
+            row_str += "  "
+        map_str += f"<div style='font-size: 0.5vw; line-height: 1.2; white-space: nowrap;'>{row_str}</div>"
 
-            map_cells_html += f'<div class="map-cell {cell_class}">{content}</div>'
-
-    # Ghép CSS và HTML
-    final_html = f"""
-    {css_styles}
-    <div class="map-wrapper">
-        <div class="map-container" style="--cols: {cols};">
-            {map_cells_html}
-        </div>
-    </div>
-    """
-
-    # Xử lý đúng cả hai trường hợp hiển thị
+    html_content = f"<div style='overflow-x: auto;'>{map_str}</div>"
     if placeholder:
-        placeholder.markdown(final_html, unsafe_allow_html=True)
+        placeholder.markdown(html_content, unsafe_allow_html=True)
     else:
-        st.markdown(final_html, unsafe_allow_html=True)
+        st.markdown(html_content, unsafe_allow_html=True)
