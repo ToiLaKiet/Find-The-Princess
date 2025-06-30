@@ -6,6 +6,7 @@ import time
 import copy # GỢI Ý: Import thư viện copy để tạo bản sao sâu
 from utils import *
 import random
+import numpy as np 
 
 def kenre_python_literal(bando, w_h, w_c, p_h, p_c):
     m = len(bando)
