@@ -138,7 +138,7 @@ def display_map(matrix, prince_pos=None, princess_pos=None, placeholder=None):
             row_str += "  "
         map_str += f"<div style='font-size: 0.5vw; line-height: 1.2; white-space: nowrap;'>{row_str}</div>"
 
-    html_content = f"<div style='overflow-x: auto;'>{map_str}</div>"
+    html_content = f"<div style='overflow-x: auto; max-height: 30vh;'>{map_str}</div>"
     if placeholder:
         placeholder.markdown(html_content, unsafe_allow_html=True)
     else:
