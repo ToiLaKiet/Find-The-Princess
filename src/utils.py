@@ -103,7 +103,7 @@ def convert_matrix_to_text(matrix):
              Trả về một chuỗi rỗng nếu ma trận đầu vào không hợp lệ hoặc rỗng.
     """
     # Xử lý trường hợp đầu vào không phải là list hoặc là list rỗng
-    if not matrix or not isinstance(matrix, list):
+    if matrix is None: # Hoạt động đúng với mọi kiểu dữ liệu
         return ""
 
     # Sử dụng list comprehension để chuyển đổi từng hàng thành một chuỗi
