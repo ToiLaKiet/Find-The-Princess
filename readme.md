@@ -1,9 +1,3 @@
-Chắc chắn rồi! Dựa trên đề bài "kén rể" và yêu cầu của bạn, tôi đã soạn một file `README.md` theo phong cách chuyên nghiệp giống như file mẫu bạn cung cấp.
-
-Bạn chỉ cần sao chép và dán nội dung dưới đây vào file `README.md` trong kho GitHub của mình.
-
----
-
 # 🤴 Tìm Đường Cứu Công Chúa (Kén Rể)
 
 - **Họ và Tên:** `Võ Anh Kiệt`
