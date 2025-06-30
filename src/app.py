@@ -154,8 +154,8 @@ map_input_text = st.text_area(
 col1, col2 = st.columns(2) # gap="small" để tạo khoảng cách nhỏ giữa 2 cột 
 st.markdown("""
 <style>
-    div[data-testid="column"] {
-        padding: 0 10px; /* Giảm khoảng cách giữa các cột */
+    div[data-testid="columns"] {
+        padding: 0 1px; /* Giảm khoảng cách giữa các cột */
     }
 </style>
 """, unsafe_allow_html=True)
