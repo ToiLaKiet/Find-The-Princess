@@ -134,6 +134,7 @@ streamlit run src/app.py
 Sau khi thực thi lệnh này, một tab mới trên trình duyệt của bạn sẽ tự động mở ra trang web của ứng dụng, thường có địa chỉ là **http://localhost:8501**.
 
 ### 5. Dừng ứng dụng
+
 Để dừng ứng dụng, quay lại cửa sổ terminal đang chạy và nhấn tổ hợp phím `Ctrl + C`.
 ---
 
