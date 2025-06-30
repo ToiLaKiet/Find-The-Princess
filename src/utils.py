@@ -8,11 +8,11 @@ def kenre_python_literal(bando, w_h, w_c, p_h, p_c):
     # Hàng đợi, tương đương q_ready
     q_ready = deque([(w_h, w_c)])
     
-    # Ma trận check, tương đương check
+    # Ma trận check
     check = [[False for _ in range(n)] for _ in range(m)]
     check[w_h][w_c] = False
     
-    # Ma trận mark, dùng để lưu ô cha
+    # Ma trận mark, dùng để lưu ô cha của ô hiện tại 
     # Khởi tạo với giá trị không hợp lệ, ví dụ (-1, -1)
     mark = [[(-1, -1) for _ in range(n)] for _ in range(m)]
 
