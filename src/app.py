@@ -199,7 +199,7 @@ if st.session_state.get('processing', False):
 
         with st.spinner("Hoàng tử đang dò đường..."):
             path = kenre_python_literal(matrix, prince_pos[0], prince_pos[1], princess_pos[0], princess_pos[1])
-        
+        print(path)
         if path != -1:
             st.info(f"Đã tìm thấy đường đi với {len(path)} bước. Bắt đầu di chuyển...")
             animated_matrix = copy.deepcopy(matrix)
