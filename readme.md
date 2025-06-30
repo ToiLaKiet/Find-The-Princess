@@ -8,15 +8,16 @@
 
 ## 📚 Mục Lục
 
-- [🎯 Mục Tiêu Bài Toán](#🎯-Mục-Tiêu-Bài-Toán)
-- [💡 Ý Tưởng và Giải Pháp](#💡-Ý-Tưởng-và-Giải-Pháp)
-- [📌 Test Case](#📌-Test-Case)
-- [🕹️ Tính Năng Mở Rộng](#🕹️-Tính-Năng-Mở-Rộng)
-- [⚠️ Hạn chế](#⚠️-Hạn-chế)
-- [📂 Cấu Trúc Thư Mục](#📂-Cấu-Trúc-Thư-Mục)
-- [⚙️ Hướng Dẫn Biên Dịch và Chạy Chương Trình](#️⚙️-Hướng-Dẫn-Biên-Dịch-và-Chạy-Chương-Trình)
-- [🛠️ Công Nghệ Sử Dụng](#️🛠️-Công-Nghệ-Sử-Dụng)
-- [📬 Liên Hệ](#📬-Liên-Hệ)
+- [Mục tiêu bài toán](#mục-tiêu-bài-toán)
+- [Ý tưởng & Giải pháp](#ý-tưởng--giải-pháp)
+- [Test case](#test-case)
+- [Tính năng mở rộng](#tính-năng-mở-rộng)
+- [Hạn chế](#hạn-chế)
+- [Cấu trúc thư mục](#cấu-trúc-thư-mục)
+- [Hướng dẫn cài đặt & chạy chương trình](#hướng-dẫn-cài-đặt--chạy-chương-trình)
+- [Công nghệ sử dụng](#công-nghệ-sử-dụng)
+- [Liên hệ](#liên-hệ)
+
 
 ## 🎯 Mục Tiêu Bài Toán
 
