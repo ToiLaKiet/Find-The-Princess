@@ -116,44 +116,65 @@ def convert_matrix_to_text(matrix):
     return "\n".join(row_strings)
 def display_map(matrix, prince_pos=None, princess_pos=None, placeholder=None):
     """
-    Hiển thị bản đồ bằng HTML và CSS Grid để đảm bảo các ô cách đều và đẹp mắt.
+    Hiển thị bản đồ bằng HTML và CSS Grid.
+    Container bản đồ sẽ chiếm khoảng 40% chiều rộng màn hình và các ô sẽ tự co giãn.
     """
-    # Định nghĩa các lớp CSS cho từng loại ô
-    # Chúng ta sẽ dùng màu nền thay vì emoji khối ⬜ và 🪨
+    # Định nghĩa các lớp CSS.
     css_styles = """
     <style>
+        .map-wrapper {
+            /* Container này giúp căn giữa bản đồ nếu cần */
+            width: 100%;
+            display: flex;
+            justify-content: center; /* Căn giữa bản đồ theo chiều ngang */
+        }
         .map-container {
-            display: inline-grid;
-            grid-template-columns: repeat(var(--cols), 1fr);
-            gap: 3px; /* Khoảng cách giữa các ô */
-            background-color: #555; /* Màu nền cho khoảng cách */
+            /* YÊU CẦU CHÍNH: Chiếm 40% chiều rộng màn hình */
+            width: 40vw;
+
+            /* Cải tiến thêm để UI đẹp hơn trên mọi màn hình */
+            max-width: 90vh; /* Ngăn bản đồ quá lớn trên màn hình siêu rộng, giới hạn chiều rộng bằng 90% chiều cao */
+            min-width: 320px; /* Đảm bảo bản đồ không quá nhỏ trên màn hình hẹp */
+
+            /* Các thuộc tính của CSS Grid */
+            display: grid; /* Sử dụng Grid Layout */
+            grid-template-columns: repeat(var(--cols), 1fr); /* Chia thành N cột bằng nhau */
+            gap: 2px; /* Khoảng cách nhỏ giữa các ô */
             border: 2px solid #555;
             border-radius: 5px;
-            padding: 3px;
-            overflow-x: auto;
+            padding: 2px;
+            background-color: #555;
         }
         .map-cell {
-            width: 2.2em; /* Kích thước ô */
-            height: 2.2em;
+            /* Tự động biến thành hình vuông */
+            aspect-ratio: 1 / 1;
+
+            /* Căn giữa nội dung (emoji) trong ô */
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 1.2em; /* Kích thước emoji */
+
+            /* Kích thước emoji co giãn theo kích thước màn hình */
+            font-size: 1.8vmin; /* vmin = 1% của chiều nhỏ hơn (rộng hoặc cao) */
+            
             border-radius: 3px;
         }
-        .path { background-color: #e0e0e0; } /* Màu đường đi */
-        .wall { background-color: #6c757d; } /* Màu đá */
-        .trail { background-color: #87CEEB; } /* Màu đường đã đi (xanh da trời) */
+        /* Định nghĩa màu sắc cho từng loại ô */
+        .path { background-color: #e9ecef; }   /* Màu đường đi */
+        .wall { background-color: #6c757d; }   /* Màu đá */
+        .trail { background-color: #87CEEB; }  /* Màu đường đã đi */
     </style>
     """
 
-    rows = len(matrix)
-    cols = len(matrix[0])
-    
+    # Lấy kích thước của ma trận
+    # Chuyển đổi sang numpy array để dùng .shape cho an toàn
+    matrix_np = np.array(matrix)
+    rows, cols = matrix_np.shape
+
     # Bắt đầu xây dựng chuỗi HTML cho các ô
     map_cells_html = ""
-    for r_idx, row in enumerate(matrix):
-        for c_idx, cell_type in enumerate(row):
+    for r_idx in range(rows):
+        for c_idx in range(cols):
             pos = (r_idx, c_idx)
             content = ""
             cell_class = ""
@@ -167,7 +188,8 @@ def display_map(matrix, prince_pos=None, princess_pos=None, placeholder=None):
                 content = "👸"
                 cell_class = "path"
             else:
-                # Xác định lớp CSS cho màu nền
+                # Xác định lớp CSS cho màu nền dựa trên giá trị của ô
+                cell_type = matrix_np[r_idx, c_idx]
                 if cell_type == 2:   # Đường đã đi
                     cell_class = "trail"
                 elif cell_type == 1: # Đá
@@ -178,11 +200,13 @@ def display_map(matrix, prince_pos=None, princess_pos=None, placeholder=None):
             map_cells_html += f'<div class="map-cell {cell_class}">{content}</div>'
 
     # Ghép CSS và HTML lại với nhau
-    # Sử dụng biến CSS `--cols` để truyền số cột vào grid
+    # Sử dụng biến CSS `--cols` để truyền số cột vào grid một cách linh hoạt
     final_html = f"""
     {css_styles}
-    <div class="map-container" style="--cols: {cols};">
-        {map_cells_html}
+    <div class="map-wrapper">
+        <div class="map-container" style="--cols: {cols};">
+            {map_cells_html}
+        </div>
     </div>
     """
 
