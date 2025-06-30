@@ -1,29 +1,29 @@
-# 🤴 Hành Trình Kén Rể: Tìm Đường Tới Công Chúa 👸
+# 🤴 Tìm Đường Cứu Công Chúa (Thử Thách Kén Rể)
 
-*Một thử thách mô phỏng thuật toán BFS, nơi hiệp sĩ phải tìm ra con đường ngắn nhất để giải cứu công chúa và chứng tỏ mình xứng đáng.*
+Đồ án môn học ứng dụng thuật toán **BFS (Breadth-First Search)** để tìm đường đi ngắn nhất trên bản đồ dạng lưới. Ứng dụng được xây dựng bằng Python và có giao diện trực quan hóa bằng Streamlit.
 
-**Hiệp sĩ thực hiện:**
-| Họ và Tên     | MSSV       | Lớp         |
-|---------------|------------|-------------|
-| **Võ Anh Kiệt** | `23520825` | `CS112.P22` |
+**Sinh viên thực hiện:**
+- **Họ và Tên:** `Võ Anh Kiệt`
+- **MSSV:** `23520825`
+- **Lớp:** `CS112.P22`
 
 ---
 
-## 🗺️ Bản Đồ Hành Trình
+## 📜 Sơ Lược Hành Trình
 
-- [🎯 **Sứ Mệnh:** Mục Tiêu Thử Thách](#🎯-sứ-mệnh-mục-tiêu-thử-thách)
-- [💡 **Chiến Lược:** Ý Tưởng & Giải Pháp](#💡-chiến-lược-ý-tưởng--giải-pháp)
-- [📌 **Các Chướng Ngại Vật:** Test Case](#📌-các-chướng-ngại-vật-test-case)
-- [🕹️ **Phép Thuật Mở Rộng:** Tính Năng Thêm](#🕹️-phép-thuật-mở-rộng-tính-năng-thêm)
-- [⚠️ **Giới Hạn Sức Mạnh:** Hạn Chế](#⚠️-giới-hạn-sức-mạnh-hạn-chế)
-- [📂 **Kho Báu:** Cấu Trúc Thư Mục](#📂-kho-báu-cấu-trúc-thư-mục)
-- [⚙️ **Triệu Hồi:** Hướng Dẫn Cài Đặt & Chạy](#⚙️-triệu-hồi-hướng-dẫn-cài-đặt--chạy)
-- [🛠️ **Vũ Khí:** Công Nghệ Sử Dụng](#🛠️-vũ-khí-công-nghệ-sử-dụng)
-- [📬 **Gửi Thư Bồ Câu:** Liên Hệ](#📬-gửi-thư-bồ-câu-liên-hệ)
+- [🎯 Mục Tiêu Bài Toán](#-mục-tiêu-bài-toán)
+- [💡 Ý Tưởng và Giải Pháp](#-ý-tưởng-và-giải-pháp)
+- [📌 Test Case Mẫu](#-test-case-mẫu)
+- [🕹️ Tính Năng Mở Rộng](#-tính-năng-mở-rộng)
+- [⚠️ Hạn Chế](#-hạn-chế)
+- [📂 Cấu Trúc Thư Mục](#-cấu-trúc-thư-mục)
+- [⚙️ Hướng Dẫn Cài Đặt và Chạy](#-hướng-dẫn-cài-đặt-và-chạy)
+- [🛠️ Công Nghệ Sử Dụng](#-công-nghệ-sử-dụng)
+- [📬 Thông Tin Liên Hệ](#-thông-tin-liên-hệ)
 
-## 🎯 Sứ Mệnh: Mục Tiêu Thử Thách
+## 🎯 Mục Tiêu Bài Toán
 
-Nhiệm vụ của hiệp sĩ là tìm **đường đi ngắn nhất** trên một bản đồ dạng lưới (`m x n`) để đến được hoàng cung cứu công chúa.
+Bài toán yêu cầu tìm **đường đi ngắn nhất** cho một hiệp sĩ trên bản đồ dạng lưới (`m x n`) để đến được hoàng cung cứu công chúa.
 
 1.  **Bản đồ:** Một lưới hình chữ nhật kích thước `m x n`, với các ô đi được (`0`) và các ô là chướng ngại vật không đi được (`1`).
 2.  **Di chuyển:** Hiệp sĩ có thể di chuyển từ một ô sang 8 ô lân cận (ngang, dọc, và chéo). Mỗi bước đi tốn **1 canh giờ**.
@@ -32,9 +32,9 @@ Nhiệm vụ của hiệp sĩ là tìm **đường đi ngắn nhất** trên m�
 
 ---
 
-## 💡 Chiến Lược: Ý Tưởng & Giải Pháp
+## 💡 Ý Tưởng và Giải Pháp
 
-Để hoàn thành sứ mệnh, hiệp sĩ sẽ sử dụng một chiến lược cổ xưa và hiệu quả: Thuật toán **Tìm kiếm theo chiều rộng (Breadth-First Search - BFS)**. Đây là lựa chọn tối ưu cho việc tìm đường đi ngắn nhất trên một đồ thị mà mọi bước đi đều có giá trị như nhau.
+Để giải quyết bài toán tìm đường đi ngắn nhất trên một đồ thị không có trọng số (hoặc các cạnh có cùng trọng số), thuật toán **Tìm kiếm theo chiều rộng (Breadth-First Search - BFS)** là lựa chọn tối ưu.
 
 ### Nguyên lý hoạt động của BFS:
 1.  **Khởi tạo:**
@@ -45,83 +45,80 @@ Nhiệm vụ của hiệp sĩ là tìm **đường đi ngắn nhất** trên m�
 
 2.  **Quá trình duyệt:**
     *   Lấy ô đầu tiên trong hàng đợi.
-    *   Kiểm tra xem ô đó có phải là vị trí của công chúa không. Nếu phải, truy vết ngược từ mảng `mark` để tìm ra đường đi và kết thúc. Nếu không, tiếp tục.
+    *   Kiểm tra xem ô đó có phải là vị trí của công chúa không. Nếu phải thì truy vết ngược từ mảng `mark` để tìm ra đường đi và kết thúc. Nếu không, tiếp tục.
     *   Duyệt qua tất cả các ô lân cận (8 hướng di chuyển) của ô hiện tại.
     *   Với mỗi ô lân cận:
-        *   Kiểm tra xem nó có nằm trong bản đồ không.
-        *   Kiểm tra xem nó có phải là chướng ngại vật (`1`) hay đã được đánh dấu (`check`) chưa.
-        *   Nếu ô lân cận hợp lệ, đánh dấu nó (`check`), lưu lại dấu vết trong mảng `mark`, và thêm nó vào hàng đợi.
+        *   Kiểm tra xem nó có nằm trong phạm vi của bản đồ không.
+        *   Kiểm tra xem ô đó có phải là chướng ngại vật (`1`) hay đã được đánh dấu (`check`) chưa.
+        *   Nếu ô lân cận hợp lệ, đánh dấu nó là đã đi qua (`check`), lưu tọa độ của ô hiện tại vào mảng `mark`, và thêm nó vào hàng đợi.
     *   Lặp lại quá trình này cho đến khi hàng đợi rỗng hoặc tìm thấy công chúa.
-
 3.  **Kết quả:**
     *   Nếu vòng lặp kết thúc mà chưa tìm thấy đích, có nghĩa là không tồn tại đường đi. Trả về `-1`.
-    *   Ngược lại, trả về mảng chứa các tọa độ của con đường chiến thắng từ vị trí của hiệp sĩ đến công chúa.
+    *   Ngược lại, trả về mảng chứa các tọa độ của đường đi từ vị trí của hiệp sĩ đến công chúa.
 
 ### Chú ý về hệ tọa độ:
-Đề bài quy định tọa độ `(x, y)` với `(0, 0)` ở góc dưới-trái. Khi làm việc với mảng 2D trong C++, chỉ số `[0][0]` thường ở góc trên-trái. Do đó, cần có một phép biến đổi tọa độ:
+Đề bài quy định tọa độ `(x, y)` với `(0, 0)` ở góc dưới-trái. Khi làm việc với mảng 2D trong C++ (hoặc các ngôn ngữ khác), chỉ số `[0][0]` thường ở góc trên-trái. Do đó, cần có một bước chuyển đổi tọa độ:
 `map_array[m - 1 - y][x]` tương ứng với tọa độ `(x, y)`.
 
 ---
 
-## 📌 Các Chướng Ngại Vật: Test Case
-Hiệp sĩ có thể luyện tập với các thử thách mẫu tại đây:
+## 📌 Test Case Mẫu
 [🧪 Link đến các Test Case mẫu](https://github.com/ToiLaKiet/Find-The-Princess/tree/master/test)
 
-## 🕹️ Phép Thuật Mở Rộng: Tính Năng Thêm
-Ngoài nhiệm vụ chính, hiệp sĩ còn có thể sử dụng phép thuật để:
-- **Sinh ngẫu nhiên bản đồ**: Tạo ra những thử thách mới với kích thước tùy ý và các chướng ngại vật được phân bố ngẫu nhiên.
+## 🕹️ Tính Năng Mở Rộng
+- **Sinh ngẫu nhiên bản đồ**: Bạn có thể tạo một bản đồ mới với kích thước tùy ý và các chướng ngại vật được phân bố ngẫu nhiên.
 
-## ⚠️ Giới Hạn Sức Mạnh: Hạn Chế
-Mọi phép thuật đều có giới hạn. Hiện tại, khi các thành phần giao diện được render lại liên tục (ví dụ: sinh bản đồ mới quá nhanh), ứng dụng có thể gặp lỗi và cần phải tải lại trang.
+## ⚠️ Hạn chế
+- Tuy tính năng sinh ngẫu nhiên tốt nhưng hiện tại khi các component render liên tục sẽ dẫn tới lỗi, phải reload lại trang.
 
-## 📂 Kho Báu: Cấu Trúc Thư Mục
+## 📂 Cấu Trúc Thư Mục
 
-Bản đồ kho báu của dự án được sắp xếp như sau để dễ dàng quản lý và sử dụng:
+Cấu trúc dự án được tổ chức để dễ dàng quản lý và biên dịch.
 
 ```
 .
 ├── src/
-│   ├── app.py            # Nơi chứa giao diện và phép thuật Streamlit
-│   └── utils.py          # Lõi thuật toán BFS, trái tim của hiệp sĩ
+│   ├── app.py            # File chứa giao diện Streamlit app
+│   └── utils.py          # File chứa logic thuật toán BFS
 ├── assets/
-│   └── logo-uit.png      # Huy hiệu, cờ hiệu
-├── test/                 # Khu vực luyện tập với các thử thách
+│   └── logo-uit.png      # Logo, favicon
+├── test/                 # Thư mục chứa các file test case
 │   ├── Test Case 1
         ├── input.txt
 │   └── Test Case 2  
         ├── input.txt 
 ├── .gitignore
-├── readme.md             # Cuộn giấy hướng dẫn này
-├── requirments.txt       # Danh sách các thần chú cần thiết
+├── readme.md             # File hướng dẫn sử dụng    
+├── requirements.txt      # File chứa các thư viện cần thiết
 ```
 
 ---
 
-## ⚙️ Triệu Hồi: Hướng Dẫn Cài Đặt & Chạy
+## ⚙️ Hướng Dẫn Cài Đặt và Chạy
 
-Để bắt đầu hành trình trên máy của bạn, hãy làm theo các bước sau.
+Để chạy chương trình trên máy của bạn, hãy làm theo các bước sau.
 
-### Bí Kíp Yêu Cầu
+### Yêu cầu
 - Cài đặt Python 3.x (phiên bản 3.9+ được khuyến khích).
 
-### Các Bước Triệu Hồi
+### Các bước thực hiện
 
-#### 1. Nhận Nhiệm Vụ từ Thánh Địa GitHub
-Đầu tiên, sao chép (clone) kho báu này về máy và di chuyển vào vùng đất của dự án.
+#### 1. Tải mã nguồn về máy
+Đầu tiên, sao chép (clone) repository này về máy tính của bạn và di chuyển vào thư mục dự án.
 ```bash
 git clone https://github.com/ToiLaKiet/Find-The-Princess.git
 cd Find-The-Princess
 ```
 
-#### 2. Chuẩn Bị Vùng Đất Phép Thuật (Môi Trường Ảo)
-Sử dụng môi trường ảo là một nghi thức quan trọng để giữ cho các phép thuật của dự án không xung đột với thế giới bên ngoài.
+#### 2. Tạo và kích hoạt môi trường ảo
+Sử dụng môi trường ảo là một thói quen tốt để quản lý các thư viện của dự án một cách độc lập, tránh xung đột với các dự án khác.
 
-**Cách A: Sử dụng `venv` (Công cụ tích hợp của Python, khuyến khích)**
+**Cách A: Sử dụng `venv` (Công cụ tích hợp sẵn của Python, khuyến khích)**
 ```bash
-# Tạo một vùng đất phép thuật tên "venv"
+# Tạo một môi trường ảo có tên là "venv"
 python3 -m venv venv
 
-# Kích hoạt vùng đất này
+# Kích hoạt môi trường vừa tạo
 # Trên macOS hoặc Linux:
 source venv/bin/activate
 
@@ -129,9 +126,9 @@ source venv/bin/activate
 venv\Scripts\activate
 ```
 
-**Cách B: Sử dụng `Conda` (Nếu bạn là một pháp sư Anaconda)**
+**Cách B: Sử dụng `Conda` (Nếu bạn đã cài đặt Anaconda hoặc Miniconda)**
 ```bash
-# Tạo môi trường mới tên "princess_app"
+# Tạo một môi trường mới tên là "princess_app" với phiên bản Python 3.9
 conda create --name princess_app python=3.9 -y
 
 # Kích hoạt môi trường
@@ -139,32 +136,32 @@ conda activate princess_app
 ```
 Sau khi kích hoạt, bạn sẽ thấy tên môi trường (`(venv)` hoặc `(princess_app)`) xuất hiện ở đầu dòng lệnh.
 
-#### 3. Trang Bị Thần Chú (Cài Đặt Thư Viện)
-Khi đã ở trong vùng đất phép thuật, hãy đọc cuộn giấy `requirements.txt` để trang bị tất cả các thần chú cần thiết.
+#### 3. Cài đặt các thư viện cần thiết
+Khi môi trường ảo đã được kích hoạt, hãy chạy lệnh sau để cài đặt tất cả các thư viện được yêu cầu từ file `requirements.txt`.
 ```bash
 pip install -r requirements.txt
 ```
 
-#### 4. Bắt Đầu Hành Trình!
-Bây giờ, bạn đã sẵn sàng. Hãy triệu hồi ứng dụng!
+#### 4. Khởi chạy ứng dụng Streamlit
+Bây giờ, bạn đã sẵn sàng để chạy ứng dụng!
 ```bash
 streamlit run src/app.py
 ```
-Một cánh cổng sẽ tự động mở ra trên trình duyệt của bạn (thường là **http://localhost:8501**), dẫn đến giao diện của thử thách.
+Sau khi thực thi lệnh này, một tab mới trên trình duyệt của bạn sẽ tự động mở ra trang web của ứng dụng, thường có địa chỉ là **http://localhost:8501**.
 
-#### 5. Tạm Nghỉ
-Để kết thúc hành trình, quay lại cửa sổ terminal đang chạy và nhấn tổ hợp phím `Ctrl + C`.
-
----
-
-## 🛠️ Vũ Khí: Công Nghệ Sử Dụng
-
-- **Ngôn ngữ:** Python (Linh hồn của hiệp sĩ)
-- **Giao diện:** Streamlit (Phép thuật hiển thị)
+#### 5. Dừng ứng dụng
+Để dừng ứng dụng, quay lại cửa sổ terminal đang chạy và nhấn tổ hợp phím `Ctrl + C`.
 
 ---
 
-## 📬 Gửi Thư Bồ Câu: Liên Hệ
+## 🛠️ Công Nghệ Sử Dụng
+
+- **Ngôn ngữ:** Python
+- **Giao diện:** Streamlit
+
+---
+
+## 📬 Thông Tin Liên Hệ
 
 - 📧 **Email:** `[toilakiet.dev@gmail.com]`
-- 🐛 **Báo cáo quái vật (bug):** Nếu phát hiện quái vật trên đường đi, xin hãy mở một "issue" mới tại [Thánh Địa GitHub](https://github.com/ToiLaKiet/Find-The-Princess/issues) của dự án.
+- 🐛 **Báo lỗi:** Mọi góp ý hoặc báo lỗi, vui lòng mở một issue mới tại [GitHub Issues](https://github.com/ToiLaKiet/Find-The-Princess/issues) của repository.
