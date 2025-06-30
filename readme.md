@@ -59,7 +59,7 @@ Bài toán yêu cầu tìm **đường đi ngắn nhất** cho một hiệp sĩ 
 ---
 
 ## 📌 Test Case
-[🧪 Link đến các Test Case mẫu](https://github.com/ToiLaKiet/Find-The-Princess/tree/main/test)
+[🧪 Link đến các Test Case mẫu](https://github.com/ToiLaKiet/Find-The-Princess/tree/master/test)
 
 ## 🕹️ Tính Năng Mở Rộng
 - **Sinh ngẫu nhiên bản đồ**: Bạn có thể tạo một bản đồ mới với kích thước tùy ý và các chướng ngại vật được phân bố ngẫu nhiên.
