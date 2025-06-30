@@ -151,7 +151,7 @@ map_input_text = st.text_area(
     height=250
 )
 # Tạo 2 cột
-col1, col2 = st.columns([1,1], gap="small")
+col1, col2 = st.columns(2, gap="small") # gap="small" để tạo khoảng cách nhỏ giữa 2 cột 
 with col1:
     if st.button("Tạo Bản Đồ", type="primary", icon="⚙️"):
         parsed_matrix = parse_matrix_from_text(map_input_text)
@@ -168,7 +168,7 @@ with col1:
         else:
             st.session_state.map_confirmed = False
 with col2:
-    if st.button("Xoá Bản Đồ", type="secondary", icon="🗑️"):
+    if st.button("Đặt Lại", type="secondary", icon="🔄"):
         st.session_state.matrix_data = None
         st.session_state.map_confirmed = False
         st.session_state.prince_pos = None
