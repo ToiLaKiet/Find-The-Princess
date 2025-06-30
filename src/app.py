@@ -218,10 +218,5 @@ if st.session_state.map_confirmed:
                 
                 st.success("Thành công! Hoàng tử đã tìm được công chúa! ❤️")
                 st.balloons()
-                # Chèn audio file (applause.mp3) trong cùng thư mục
-                audio_file = open('applause.mp3', 'rb')
-                audio_bytes = audio_file.read()
-
-                st.audio(audio_bytes, format='audio/mp3')
             else:
                 st.error("Rất tiếc, không có đường nào để Hoàng tử tìm Công chúa. 💔")

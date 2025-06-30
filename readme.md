@@ -38,13 +38,20 @@ Bài toán yêu cầu tìm **đường đi ngắn nhất** cho một hiệp sĩ 
 1.  **Khởi tạo:**
     *   Bắt đầu từ đỉnh xuất phát (vị trí của hiệp sĩ).
     *   Sử dụng một `hàng đợi (queue)` để lưu trữ các ô sẽ được duyệt.
-    *   Sử dụng một mảng 2D `visited` để đánh dấu các ô đã đi qua, tránh đi lại và tạo vòng lặp vô tận.
-    *   Sử dụng một mảng 2D `distance` để lưu khoảng cách (số canh giờ) từ điểm xuất phát đến ô hiện tại.
+    *   Sử dụng một mảng 2D `check` để đánh dấu các ô đã đi qua, tránh đi lại và tạo vòng lặp vô tận.
+    *   Sử dụng một mảng 2D `mark` để lưu toạ độ của ô được đi liền trước ( tức là ô parent của ô hiện tại ).
 
 2.  **Quá trình duyệt:**
-
+    *  Lấy ô đầu tiên trong hàng đợi.
+    *  Kiểm tra xem ô đó có phải là vị trí của công chúa không. Nếu phải thì return luôn một mảng được truy xuất từ mảng 2D `mark`. Nếu không thì đẩy nó vào hàng đợi.
+    *  Duyệt qua tất cả các ô lân cận (8 hướng di chuyển) của ô hiện tại.
+    *  Với mỗi ô lân cận:
+        *   Kiểm tra xem nó có nằm trong phạm vi của bản đồ không.
+        *   Kiểm tra xem ô đó có phải là chướng ngại vật (`1`) hay đã được đánh dấu (`check`) chưa.
+        *   Nếu ô lân cận hợp lệ, đánh dấu nó là đã đi qua (`check`), lưu tọa độ của ô hiện tại vào mảng `mark`, và thêm nó vào hàng đợi.
+    *  Lặp lại quá trình này cho đến khi hàng đợi rỗng hoặc tìm thấy công chúa.
 3.  **Kết quả:**
-    *   Nếu vòng lặp kết thúc mà chưa tìm thấy đích, có nghĩa là không tồn tại đường đi. Trả về `-1`.
+    *   Nếu vòng lặp kết thúc mà chưa tìm thấy đích, có nghĩa là không tồn tại đường đi. Trả về `-1`. Ngược lại, trả về mảng chứa các tọa độ của đường đi từ vị trí của hiệp sĩ đến công chúa.
 
 ### Chú ý về hệ tọa độ:
 Đề bài quy định tọa độ `(x, y)` với `(0, 0)` ở góc dưới-trái. Khi làm việc với mảng 2D trong C++ (hoặc các ngôn ngữ khác), chỉ số `[0][0]` thường ở góc trên-trái. Do đó, cần có một bước chuyển đổi tọa độ:
@@ -52,8 +59,11 @@ Bài toán yêu cầu tìm **đường đi ngắn nhất** cho một hiệp sĩ 
 
 ---
 
-## Test case
+## Test Case
 [🧪 Link đến các Test Case mẫu](https://github.com/your-username/your-repo-name/tree/main/test)
+
+## Tính Năng Mở Rộng
+- **Sinh ngẫu nhiên bản đồ**: Bạn có thể tạo một bản đồ mới với kích thước tùy ý và các chướng ngại vật được phân bố ngẫu nhiên.
 
 ## 📂 Cấu Trúc Thư Mục
 
