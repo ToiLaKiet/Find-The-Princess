@@ -4,9 +4,6 @@
 - **MSSV:** `23520825`
 - **Lớp:** `CS112.P22`
 
-[🔗 Link đến Repository GitHub](https://github.com/ToiLaKiet/Find-The-Princess)  
-[🧪 Link đến các Test Case mẫu](https://github.com/your-username/your-repo-name/tree/main/test)
-
 ---
 
 ## 📚 Mục Lục
@@ -178,6 +175,9 @@ Bài toán yêu cầu tìm **đường đi ngắn nhất** cho một hiệp sĩ 
 **Giải thích:** Đường đi ngắn nhất từ `(0,0)` đến `(5,4)` tốn 5 bước (canh giờ). Một đường đi khả thi là: `(0,0) -> (1,1) -> (2,2) -> (3,3) -> (4,3) -> (5,4)`.
 
 ---
+
+## Test case
+[🧪 Link đến các Test Case mẫu](https://github.com/your-username/your-repo-name/tree/main/test)
 
 ## 📂 Cấu Trúc Thư Mục
 
