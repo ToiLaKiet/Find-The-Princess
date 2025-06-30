@@ -1,5 +1,11 @@
 from collections import deque
 import sys
+import streamlit as st
+import re
+import time
+import copy # GỢI Ý: Import thư viện copy để tạo bản sao sâu
+from utils import *
+import random
 
 def kenre_python_literal(bando, w_h, w_c, p_h, p_c):
     m = len(bando)
@@ -49,26 +55,65 @@ def kenre_python_literal(bando, w_h, w_c, p_h, p_c):
                 q_ready.append((next_h, next_c))
     
     return -1 # Không tìm thấy đường đi
-
-
-if __name__ == "__main__":
+def parse_matrix_from_text(text_data):
+    matrix = []
+    lines = text_data.strip().split('\n')
     try:
-        first = input().strip()
-        m, n, w_h, w_c, p_h, p_c = map(int, first.split())
-        print("Thông tin bản đồ:", m, n, w_h, w_c, p_h, p_c)
-        bando_input = []
-        while(len(bando_input) < m):
-            line = input().strip()
-            if line:
-                bando_input.append(list(map(int, line.split())))
-        # print("Bản đồ đã nhận:", bando_input, "Kích thước:", len(bando_input), "x", len(bando_input[0]) if bando_input else 0)
-        
-        
-        bando_input.reverse()
+        for i, line in enumerate(lines):
+            line = line.strip()
+            if not line: continue
+            row_str = re.split(r'\s+', line)
+            row_int = [int(num) for num in row_str]
+            if any(cell not in [0, 1] for cell in row_int):
+                st.error(f"Lỗi ở dòng {i+1}: Dữ liệu chứa giá trị không phải 0 hoặc 1.")
+                return None
+            matrix.append(row_int)
+        if not matrix:
+            st.warning("Dữ liệu đầu vào trống.")
+            return None
+        first_row_len = len(matrix[0])
+        if any(len(r) != first_row_len for r in matrix):
+            st.error("Lỗi: Các dòng có số cột không đồng nhất.")
+            return None
+        # GỢI Ý: Bỏ matrix.reverse() đi. Tọa độ (0,0) theo list index tự nhiên là góc trên bên trái.
+        # Điều này giúp logic tọa độ nhất quán hơn.
+        return matrix
+    except ValueError:
+        st.error("Lỗi: Dữ liệu chứa ký tự không phải là số.")
+        return None
+    except Exception as e:
+        st.error(f"Đã xảy ra lỗi không xác định: {e}")
+        return None
+def convert_matrix_to_text(matrix):
+    """
+    Chuyển đổi một ma trận (list of lists) thành một chuỗi văn bản.
 
-        result = kenre_python_literal(bando_input, w_h, w_c, p_h, p_c)
-        print(result)
+    Mỗi hàng của ma trận sẽ trở thành một dòng trong chuỗi,
+    và các phần tử trong mỗi hàng được nối với nhau bằng một khoảng trắng.
 
-    except (IOError, ValueError):
-        print("Định dạng input không hợp lệ.")
+    Ví dụ:
+        Input: [[0, 1, 0], [1, 1, 0]]
+        Output: "0 1 0\n1 1 0"
+
+    Args:
+        matrix (list[list[int]]): Ma trận chứa các số nguyên (0 hoặc 1).
+
+    Returns:
+        str: Chuỗi văn bản biểu diễn ma trận.
+             Trả về một chuỗi rỗng nếu ma trận đầu vào không hợp lệ hoặc rỗng.
+    """
+    # Xử lý trường hợp đầu vào không phải là list hoặc là list rỗng
+    if not matrix or not isinstance(matrix, list):
+        return ""
+
+    # Sử dụng list comprehension để chuyển đổi từng hàng thành một chuỗi
+    # 1. `map(str, row)`: Chuyển mọi số trong `row` thành chuỗi.
+    # 2. `" ".join(...)`: Nối các chuỗi số lại với nhau bằng khoảng trắng.
+    # 3. `for row in matrix`: Lặp qua từng hàng của ma trận.
+    row_strings = [" ".join(map(str, row)) for row in matrix]
+
+    # Nối tất cả các chuỗi hàng lại với nhau bằng ký tự xuống dòng
+    return "\n".join(row_strings)
+
+
 

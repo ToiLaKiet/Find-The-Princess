@@ -72,38 +72,6 @@ DEFAULT_MAP_DATA = """
 """.strip()
 
 
-# --- Các hàm trợ giúp ---
-
-def parse_matrix_from_text(text_data):
-    matrix = []
-    lines = text_data.strip().split('\n')
-    try:
-        for i, line in enumerate(lines):
-            line = line.strip()
-            if not line: continue
-            row_str = re.split(r'\s+', line)
-            row_int = [int(num) for num in row_str]
-            if any(cell not in [0, 1] for cell in row_int):
-                st.error(f"Lỗi ở dòng {i+1}: Dữ liệu chứa giá trị không phải 0 hoặc 1.")
-                return None
-            matrix.append(row_int)
-        if not matrix:
-            st.warning("Dữ liệu đầu vào trống.")
-            return None
-        first_row_len = len(matrix[0])
-        if any(len(r) != first_row_len for r in matrix):
-            st.error("Lỗi: Các dòng có số cột không đồng nhất.")
-            return None
-        # GỢI Ý: Bỏ matrix.reverse() đi. Tọa độ (0,0) theo list index tự nhiên là góc trên bên trái.
-        # Điều này giúp logic tọa độ nhất quán hơn.
-        return matrix
-    except ValueError:
-        st.error("Lỗi: Dữ liệu chứa ký tự không phải là số.")
-        return None
-    except Exception as e:
-        st.error(f"Đã xảy ra lỗi không xác định: {e}")
-        return None
-
 def display_map(matrix, prince_pos=None, princess_pos=None, placeholder=None):
     map_str = ""
     # GỢI Ý: Chuyển sang một bảng màu khác để dễ nhìn hơn
@@ -147,7 +115,7 @@ st.title("🗺️ UIT@CS112 | Kén Rể | Đi tìm công chúa")
 st.header("Bước 1: Nhập dữ liệu bản đồ")
 map_input_text = st.text_area(
     "Dán dữ liệu ma trận của bạn vào đây (0: đường đi, 1: đá).",
-    value=DEFAULT_MAP_DATA,
+    value=convert_matrix_to_text(st.session_state.matrix_data) if st.session_state.matrix_data == None else DEFAULT_MAP_DATA,
     height=250
 )
 # Tạo 2 cột
