@@ -10,14 +10,13 @@
 
 - [🎯 Mục Tiêu Bài Toán](#-mục-tiêu-bài-toán)
 - [💡 Ý Tưởng và Giải Pháp](#-ý-tưởng-và-giải-pháp)
-- [📌 Ví Dụ Input](#-ví-dụ-input)
-- [✅ Ví Dụ Output Tương Ứng](#-ví-dụ-output-tương-ứng)
+- [📌 Test Case](#test-case)
+- [🕹️ Tính Năng Mở Rộng](#tính-năng-mở-rộng)
+- [⚠️ Hạn chế](#hạn-chế)
 - [📂 Cấu Trúc Thư Mục](#-cấu-trúc-thư-mục)
 - [⚙️ Hướng Dẫn Biên Dịch và Chạy Chương Trình](#️-hướng-dẫn-biên-dịch-và-chạy-chương-trình)
 - [🛠️ Công Nghệ Sử Dụng](#️-công-nghệ-sử-dụng)
 - [📬 Liên Hệ](#-liên-hệ)
-
----
 
 ## 🎯 Mục Tiêu Bài Toán
 
@@ -59,11 +58,14 @@ Bài toán yêu cầu tìm **đường đi ngắn nhất** cho một hiệp sĩ 
 
 ---
 
-## Test Case
+## 📌 Test Case
 [🧪 Link đến các Test Case mẫu](https://github.com/your-username/your-repo-name/tree/main/test)
 
-## Tính Năng Mở Rộng
+## 🕹️ Tính Năng Mở Rộng
 - **Sinh ngẫu nhiên bản đồ**: Bạn có thể tạo một bản đồ mới với kích thước tùy ý và các chướng ngại vật được phân bố ngẫu nhiên.
+
+## ⚠️ Hạn chế
+- Tuy tính năng sinh ngẫu nhiên tốt nhưng hiện tại khi các component render liên tục sẽ dẫn tới lỗi, phải reload lại trang.
 
 ## 📂 Cấu Trúc Thư Mục
 
