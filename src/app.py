@@ -90,7 +90,7 @@ map_input_text = st.text_area(
     height=250
 )
 # Tạo 2 cột
-col1, col2 = st.columns(2) # gap="small" để tạo khoảng cách nhỏ giữa 2 cột 
+col1, col2 = st.columns([1,1]) 
 st.markdown("""
 <style>
     div[data-testid="columns"] {
