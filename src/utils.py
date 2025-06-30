@@ -140,6 +140,7 @@ def display_map(matrix, prince_pos=None, princess_pos=None, placeholder=None):
             border: 2px solid #555;
             border-radius: 5px;
             padding: 2px;
+            justify-content: center; /* Căn giữa bản đồ theo chiều ngang */
             background-color: #555;
         }
         .map-cell {
