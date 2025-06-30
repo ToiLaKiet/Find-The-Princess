@@ -216,7 +216,7 @@ if st.session_state.map_confirmed:
                     )
                     time.sleep(0.15) 
                 
-                st.success("Thành công! Hoàng tử đã tìm được công chúa! ❤️")
+                st.success("Thành công! Hoàng tử đã tìm được công chúa! 🤵🏻‍♂️👰🏼")
                 st.balloons()
             else:
                 st.error("Rất tiếc, không có đường nào để Hoàng tử tìm Công chúa. 💔")
