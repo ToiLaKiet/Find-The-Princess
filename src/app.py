@@ -5,6 +5,7 @@ import copy # GỢI Ý: Import thư viện copy để tạo bản sao sâu
 from utils import *
 from PIL import Image
 import random
+import numpy as np
 
 uit = Image.open('./assets/logo-uit.png')
 
@@ -90,11 +91,11 @@ map_input_text = st.text_area(
     height=250
 )
 # Tạo 2 cột
-col1, col2 = st.columns([1,1]) 
+col1, col2, col3 = st.columns([1,1,1]) 
 st.markdown("""
 <style>
-    div[data-testid="columns"] {
-        padding: 0 1px; /* Giảm khoảng cách giữa các cột */
+    div[data-testid="column"] {
+        padding: 0 5px; /* Giảm khoảng cách giữa các cột */
     }
 </style>
 """, unsafe_allow_html=True)
@@ -103,7 +104,6 @@ with col1:
     if st.button("Tạo Bản Đồ", type="primary", icon="⚙️"):
         st.session_state.map_confirmed = False  
         st.session_state.matrix_data = None  # Reset dữ liệu bản đồ
-        time.sleep(0.5)  # Giả lập thời gian xử lý
         parsed_matrix = parse_matrix_from_text(map_input_text)
         if parsed_matrix:
             time.sleep(0.5)  # Giả lập thời gian xử lý
@@ -118,6 +118,15 @@ with col1:
         else:
             st.session_state.map_confirmed = False
 with col2:
+    if st.button("Sinh ngẫu nhiên bản đồ", type="primary", icon="🎲"):
+        st.session_state.map_confirmed = True
+        # Randomly choose rows and columns between 3 and 100
+        rows = np.random.randint(3, 101)
+        cols = np.random.randint(3, 101)
+
+        # Generate matrix with random 0 or 1
+        st.session_state.matrix_data = np.random.randint(0, 2, size=(rows, cols))
+with col3:
     if st.button("Đặt Lại", type="secondary", icon="🔄"):
         st.session_state.matrix_data = None
         st.session_state.map_confirmed = False
