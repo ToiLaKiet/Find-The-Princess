@@ -147,11 +147,11 @@ st.title("🗺️ UIT@CS112 | Kén Rể | Đi tìm công chúa")
 st.header("Bước 1: Nhập dữ liệu bản đồ")
 map_input_text = st.text_area(
     "Dán dữ liệu ma trận của bạn vào đây (0: đường đi, 1: đá).",
-    value=st.session_state.matrix_data if st.session_state.matrix_data != None else DEFAULT_MAP_DATA,
+    value=DEFAULT_MAP_DATA,
     height=250
 )
 # Tạo 2 cột
-col1, col2 = st.columns(2, gap="small") # gap="small" để tạo khoảng cách nhỏ giữa 2 cột 
+col1, col2 = st.columns(2) # gap="small" để tạo khoảng cách nhỏ giữa 2 cột 
 with col1:
     if st.button("Tạo Bản Đồ", type="primary", icon="⚙️"):
         parsed_matrix = parse_matrix_from_text(map_input_text)
@@ -174,7 +174,15 @@ with col2:
         st.session_state.prince_pos = None
         st.session_state.princess_pos = None
         st.rerun()  # Làm mới trang để xoá bản đồ
-    
+
+st.markdown("""
+<style>
+    div[data-testid="column"] {
+        padding-right: 10px;
+    }
+</style>
+""", unsafe_allow_html=True)
+
 if st.session_state.map_confirmed:
     st.success(f"Bản đồ đã được tạo thành công với kích thước {st.session_state.rows}x{st.session_state.cols}!") 
     st.divider()
