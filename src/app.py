@@ -115,7 +115,7 @@ st.title("🗺️ UIT@CS112 | Kén Rể | Đi tìm công chúa")
 st.header("Bước 1: Nhập dữ liệu bản đồ")
 map_input_text = st.text_area(
     "Dán dữ liệu ma trận của bạn vào đây (0: đường đi, 1: đá).",
-    value=convert_matrix_to_text(st.session_state.matrix_data) if st.session_state.matrix_data == None else DEFAULT_MAP_DATA,
+    value=convert_matrix_to_text(st.session_state.matrix_data) if st.session_state.matrix_data != None else DEFAULT_MAP_DATA,
     height=250
 )
 # Tạo 2 cột
