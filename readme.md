@@ -6,7 +6,7 @@
 - **Họ và Tên:** `Võ Anh Kiệt`
 - **MSSV:** `23520825`
 - **Lớp:** `CS112.P22`
-
+[**Click vào đây để tới website demo**](https://find-the-princess-cs112.streamlit.app/) 
 ---
 
 ## 📜 Sơ Lược Hành Trình
