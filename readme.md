@@ -17,13 +17,13 @@
 
 - [🎯 Mục Tiêu Bài Toán](#mục-tiêu-bài-toán)
 - [💡 Ý Tưởng và Giải Pháp](#ý-tưởng-và-giải-pháp)
-- [📌 Test Case Mẫu](#-test-case-mẫu)
-- [🕹️ Tính Năng Mở Rộng](#-tính-năng-mở-rộng)
-- [⚠️ Hạn Chế](#-hạn-chế)
-- [📂 Cấu Trúc Thư Mục](#-cấu-trúc-thư-mục)
-- [⚙️ Hướng Dẫn Cài Đặt và Chạy](#-hướng-dẫn-cài-đặt-và-chạy)
-- [🛠️ Công Nghệ Sử Dụng](#-công-nghệ-sử-dụng)
-- [📬 Thông Tin Liên Hệ](#-thông-tin-liên-hệ)
+- [📌 Test Case Mẫu](#test-case-mẫu)
+- [🕹️ Tính Năng Mở Rộng](#tính-năng-mở-rộng)
+- [⚠️ Hạn Chế](#hạn-chế)
+- [📂 Cấu Trúc Thư Mục](#cấu-trúc-thư-mục)
+- [⚙️ Hướng Dẫn Cài Đặt và Chạy](#hướng-dẫn-cài-đặt-và-chạy)
+- [🛠️ Công Nghệ Sử Dụng](#công-nghệ-sử-dụng)
+- [📬 Thông Tin Liên Hệ](#thông-tin-liên-hệ)
 
 ## Mục Tiêu Bài Toán
 
@@ -158,7 +158,7 @@ Sau khi thực thi lệnh này, một tab mới trên trình duyệt của bạn
 
 ---
 
-## 🛠️ Công Nghệ Sử Dụng
+## Công Nghệ Sử Dụng
 
 - **Ngôn ngữ:** Python
 - **Giao diện:** Streamlit
