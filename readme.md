@@ -25,7 +25,7 @@
 - [🛠️ Công Nghệ Sử Dụng](#-công-nghệ-sử-dụng)
 - [📬 Thông Tin Liên Hệ](#-thông-tin-liên-hệ)
 
-## 🎯 Mục Tiêu Bài Toán
+## Mục Tiêu Bài Toán
 
 Bài toán yêu cầu tìm **đường đi ngắn nhất** cho một hiệp sĩ trên bản đồ dạng lưới (`m x n`) để đến được hoàng cung cứu công chúa.
 
@@ -36,7 +36,7 @@ Bài toán yêu cầu tìm **đường đi ngắn nhất** cho một hiệp sĩ 
 
 ---
 
-## 💡 Ý Tưởng và Giải Pháp
+## Ý Tưởng và Giải Pháp
 
 Để giải quyết bài toán tìm đường đi ngắn nhất trên một đồ thị không có trọng số (hoặc các cạnh có cùng trọng số), thuật toán **Tìm kiếm theo chiều rộng (Breadth-First Search - BFS)** là lựa chọn tối ưu.
 
@@ -66,16 +66,16 @@ Bài toán yêu cầu tìm **đường đi ngắn nhất** cho một hiệp sĩ 
 
 ---
 
-## 📌 Test Case Mẫu
+## Test Case Mẫu
 [🧪 Link đến các Test Case mẫu](https://github.com/ToiLaKiet/Find-The-Princess/tree/master/test)
 
-## 🕹️ Tính Năng Mở Rộng
+## Tính Năng Mở Rộng
 - **Sinh ngẫu nhiên bản đồ**: Bạn có thể tạo một bản đồ mới với kích thước tùy ý và các chướng ngại vật được phân bố ngẫu nhiên.
 
-## ⚠️ Hạn chế
+## Hạn chế
 - Tuy tính năng sinh ngẫu nhiên tốt nhưng hiện tại khi các component render liên tục sẽ dẫn tới lỗi, phải reload lại trang.
 
-## 📂 Cấu Trúc Thư Mục
+## Cấu Trúc Thư Mục
 
 Cấu trúc dự án được tổ chức để dễ dàng quản lý và biên dịch.
 
@@ -98,7 +98,7 @@ Cấu trúc dự án được tổ chức để dễ dàng quản lý và biên 
 
 ---
 
-## ⚙️ Hướng Dẫn Cài Đặt và Chạy
+## Hướng Dẫn Cài Đặt và Chạy
 
 Để chạy chương trình trên máy của bạn, hãy làm theo các bước sau.
 
@@ -165,7 +165,7 @@ Sau khi thực thi lệnh này, một tab mới trên trình duyệt của bạn
 
 ---
 
-## 📬 Thông Tin Liên Hệ
+## Thông Tin Liên Hệ
 
 - 📧 **Email:** `[toilakiet.dev@gmail.com]`
 - 🐛 **Báo lỗi:** Mọi góp ý hoặc báo lỗi, vui lòng mở một issue mới tại [GitHub Issues](https://github.com/ToiLaKiet/Find-The-Princess/issues) của repository.
