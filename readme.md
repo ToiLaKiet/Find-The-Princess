@@ -15,8 +15,8 @@
 
 ## 📜 Sơ Lược Hành Trình
 
-- [🎯 Mục Tiêu Bài Toán](#-mục-tiêu-bài-toán)
-- [💡 Ý Tưởng và Giải Pháp](#-ý-tưởng-và-giải-pháp)
+- [🎯 Mục Tiêu Bài Toán](#mục-tiêu-bài-toán)
+- [💡 Ý Tưởng và Giải Pháp](#ý-tưởng-và-giải-pháp)
 - [📌 Test Case Mẫu](#-test-case-mẫu)
 - [🕹️ Tính Năng Mở Rộng](#-tính-năng-mở-rộng)
 - [⚠️ Hạn Chế](#-hạn-chế)
